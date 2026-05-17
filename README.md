@@ -1,1 +1,1 @@
-[![CI](https://github.com/pivokrbIs/lab05/actions/workflows/ci.yml/badge.svg)](https://github.com/pivokrbIs/lab05/actions/workflows/ci.yml)
+[![CI](https://github.com/pivokrbIs/lab06/actions/workflows/ci.yml/badge.svg)](https://github.com/pivokrbIs/lab06/actions/workflows/ci.yml)
