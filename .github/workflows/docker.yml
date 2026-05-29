@@ -1,0 +1,27 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Build Docker image
+      run: docker build -t logger .
+
+    - name: Run container
+      run: |
+        mkdir logs
+        echo -e "test1\ntest2\ntest3" | docker run -i -v "/home/memoria/pivokrbIs/workspace/projects/lab08/logs/:/home/logs/" logger
+
+    - name: Check output
+      run: cat logs/log.txt
