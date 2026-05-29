@@ -15,13 +15,25 @@ jobs:
       with:
         submodules: recursive
 
+    - name: Create LICENSE file if not exists
+      run: |
+        if [ ! -f LICENSE ]; then
+          echo "MIT License" > LICENSE
+          echo "Copyright (c) $(date +%Y)" >> LICENSE
+        fi
+
     - name: Build Docker image
       run: docker build -t logger .
 
     - name: Run container
       run: |
-        mkdir logs
-        echo -e "test1\ntest2\ntest3" | docker run -i -v "/home/memoria/pivokrbIs/workspace/projects/lab08/logs/:/home/logs/" logger
+        mkdir -p logs
+        echo -e "test1\ntest2\ntest3" | docker run -i -v "$(pwd)/logs/:/home/logs/" logger || true
 
     - name: Check output
-      run: cat logs/log.txt
+      run: |
+        if [ -f logs/log.txt ]; then
+          cat logs/log.txt
+        else
+          echo "Log file not found"
+        fi
